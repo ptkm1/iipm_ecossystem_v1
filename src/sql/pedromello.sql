@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 02-Jan-2021 às 15:22
+-- Tempo de geração: 03-Jan-2021 às 02:32
 -- Versão do servidor: 8.0.22-0ubuntu0.20.04.3
 -- versão do PHP: 7.4.3
 
@@ -33,15 +33,9 @@ CREATE TABLE `cidadão` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `telefone` varchar(100) DEFAULT NULL,
-  `documentos` varchar(100) DEFAULT NULL
+  `documentos` varchar(100) DEFAULT NULL,
+  `documentos_cidadao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabela de cidadãos, na qual conectará-se com os documentos e poderá inserir ou visualizar no app.';
-
---
--- Extraindo dados da tabela `cidadão`
---
-
-INSERT INTO `cidadão` (`id`, `nome`, `email`, `telefone`, `documentos`) VALUES
-('9887cb08-2353-41d0-ab30-ca3dfeab17f2', 'José Juvino', 'patrick@gmail.com', '71985429908', NULL);
 
 -- --------------------------------------------------------
 
@@ -58,12 +52,20 @@ CREATE TABLE `documentos` (
   `cidadao_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `documentos`
+-- Estrutura da tabela `usuarios`
 --
 
-INSERT INTO `documentos` (`id_documentos`, `certidao_nascimento`, `nome_social`, `relatorio_medico`, `tipagem_sanguinea`, `cidadao_id`) VALUES
-('9887cb08-2353-41d0-ab30-ca3dfeab17f2', 'Certidao teste.jpeg', 'nomesocialTeste.jpeg', '', 'Tipagem exmp.jpeg', '9887cb08-2353-41d0-ab30-ca3dfeab17f2');
+CREATE TABLE `usuarios` (
+  `id` varchar(100) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `cidade` varchar(255) DEFAULT NULL,
+  `senha` varchar(255) NOT NULL,
+  `imagem` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Funcionários do ecossistema';
 
 --
 -- Índices para tabelas despejadas
@@ -84,6 +86,12 @@ ALTER TABLE `documentos`
   ADD KEY `cidadao_id` (`cidadao_id`);
 
 --
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Restrições para despejos de tabelas
 --
 
@@ -91,7 +99,9 @@ ALTER TABLE `documentos`
 -- Limitadores para a tabela `cidadão`
 --
 ALTER TABLE `cidadão`
-  ADD CONSTRAINT `cidadão_FK` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cidadão_FK` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cidadão_ibfk_1` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`),
+  ADD CONSTRAINT `FK_CidadaoDocumentos` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`);
 
 --
 -- Limitadores para a tabela `documentos`
