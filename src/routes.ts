@@ -1,5 +1,8 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 const rotas = Router()
+
+import fs from 'fs'
+import path from 'path'
 
 // [Controllers]
 import UsuarioController from './controllers/UsuarioController'
@@ -9,6 +12,7 @@ import MulterConfig from './configs/MulterConfig'
 
 
 import multer from 'multer'
+import sharp from 'sharp'
 
 const upload = multer( MulterConfig )
 
@@ -39,12 +43,40 @@ rotas.delete('/usuarios/:barcode', UsuarioController.DeletarUsuario)
 rotas.put('/usuarios/:barcode', upload.single('image'), UsuarioController.AtualizarUsuario)
 
 
-export default rotas
+//  Rota teste
+rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response) =>{
 
-// {
-// 	"nome": "Antonio Sande",
-// 	"email": "sande@gmail.com",
-// 	"cidade": "Salvador",
-// 	"senha": "perito25",
-// 	"imagem": "imagemteste.png"
-// }
+  const nome = req.body.nome
+  const barcode = req.body.barcode
+
+  /**
+   * [ANOTAÇÕES IMPORTANTES]
+   * o metodo access vai acessar a pasta, e procurar pelo /uploads/nome
+   * e ver se existe, se ele n existe, ele cai no 1º if
+   * se ele já exisir, ele cai no else
+   */
+
+  fs.access(`/uploads/${nome}`, err => { 
+
+    if(err){ 
+
+      fs.mkdirSync(__dirname+`/uploads/${nome}`)
+
+    } else {
+
+      return console.log("O repositório já existe")
+
+    }
+
+  })
+
+  sharp(req.file.path)
+    .resize(1000)
+    .toFile(path.join(__dirname, 'uploads', nome , barcode + '.jpeg' ))
+
+    res.status(200).json({ mensagem: "upload feito com sucesso" })
+} )
+
+
+
+export default rotas
