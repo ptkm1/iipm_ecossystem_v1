@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { Conexao } from "../configs/ConexaoDB"
-import EmailService from "../services/EmailService"
+// import EmailService from "../services/EmailService"
 
 import { v4 } from 'uuid'
 
@@ -8,29 +8,173 @@ import { v4 } from 'uuid'
 export default {
 
   async Index( req: Request, res: Response ) {
-    const data = await Conexao.select('*').table('cidadão') //Trocar para tabela usuarios dps de criar
+    const data = 
+      await Conexao
+        .select('*')
+          .table('usuarios') //Trocar para tabela usuarios dps de criar
 
     return res.send(data)
   },
-
-  async Create( req: Request, res: Response ) {
-    // Criar Conexão com banco de dados, e inserir lá dentro
   
+  async UsuarioEspecífico( req: Request, res: Response ) {
+
+    const { barcode } = req.params
+  
+    try {
+       
+    const 
+    { id,
+      nome,
+      email,
+      cidade,
+      imagem } = 
+    await Conexao
+      .select('*')
+        .where({ id: barcode })
+          .table('usuarios')
+            .first()
+
+    // Tratando um objeto para enviar para o front-end com a url da foto            
+    const data = 
+    { id,
+      nome,
+      email,
+      cidade,
+      imagem: `localhost:3333/uploads/${imagem}` }
+
+    return res
+      .status(200)
+        .send(data)
+
+    } catch {
+
+    return res
+      .status(404)
+        .send({ mensagem: "Não foi possível criar um usuário" })
+      
+    }
 
   },
 
-  async Mail( req: Request, res: Response ) {
+  async Create( req: Request, res: Response ) {
+    const { nome, email, cidade, senha } = req.body
 
-    // Serviço para envio de e-mail fake (apenas para estudo de interfaces e classes)
+    const image = req.file
 
-    const emailService = new EmailService()
+    const data = 
+    { id: v4(),
+      nome,
+      email,
+      senha,
+      cidade,
+      imagem: image.filename }
 
-    emailService.sendMail({
-      para: { nome: "Diego", email: "diego@gmail.com" },
-      mensagem: { subject: "Bem-vindo ao sistema", body: "seja bem-vindo" },
-    })
+      try {
 
-    return res.send("Sucesso")
-  }
+      await Conexao
+        .insert(data)
+          .into("usuarios")
+
+      return res
+        .status(200)
+          .send({ mensagem: "Usuário criado com sucesso" })
+
+      } catch {
+
+      return res
+        .status(404)
+          .send({ mensagem: "Não foi possível criar um usuário" })
+
+      }
+
+  },
+
+
+  async AtualizarUsuario( req: Request, res: Response ) {
+
+    const { barcode } = req.params
+
+    const { nome, email, cidade, senha } = req.body
+
+    var image
+
+    if (req.file == undefined) {
+
+      const { imagem } = 
+        await Conexao
+          .table('usuarios')
+            .select("imagem")
+
+      image = imagem
+
+    } else {
+
+        image = req.file.filename
+    }
+
+    const data = 
+    { nome: "ptktesteaaaaaaaa",
+      email: "pteste@gmail.c",
+      cidade: "salcity",
+      senha: "505050",
+      imagem: image }
+
+    try {
+      
+      await Conexao
+        .table("usuarios")
+          .where({ id: barcode })
+            .update(data)
+
+        return res
+          .status(200)
+            .send({ mensagem: "Usuário atualizado com sucesso" })
+
+    } catch {
+        return res
+          .status(401)
+            .send({ mensagem: "Não foi possível atualizar o usuário" })
+    }
+
+  },
+
+  async DeletarUsuario( req: Request, res: Response ) {
+
+    const { barcode } = req.params
+
+    try {
+
+      await Conexao
+        .table("usuarios")
+          .where({ id: barcode })
+            .delete()
+      
+      return res
+        .status(200)
+          .send({ mensagem: "Usuário deletado com sucesso" })
+
+    } catch {
+      
+      return res
+        .status(401)
+          .send({ mensagem: "Não foi possível deletar usuário" })
+
+    }
+
+  },
+
+  // async Mail( req: Request, res: Response ) {
+
+  //   // Serviço para envio de e-mail fake (apenas para estudo de interfaces e classes)
+
+  //   const emailService = new EmailService()
+
+  //   emailService.sendMail({
+  //     para: { nome: "Diego", email: "diego@gmail.com" },
+  //     mensagem: { subject: "Bem-vindo ao sistema", body: "seja bem-vindo" },
+  //   })
+
+  //   return res.send("Sucesso")
+  // }
 
 }

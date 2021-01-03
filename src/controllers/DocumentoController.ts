@@ -7,11 +7,24 @@ export default {
 
     const { barcode } = req.body
 
-    const data = 
+    const { 
+      certidao_nascimento, 
+      nome_social, 
+      relatorio_medico, 
+      tipagem_sanguinea, 
+      cidadao_id } = 
      await Conexao
       .select()
-      .where('cidadao_id', barcode)
-        .table("documentos")
+        .where('cidadao_id', barcode)
+          .table("documentos")
+            .first()
+
+    const data = 
+    { certidao_nascimento: `localhost:3333/uploads/${certidao_nascimento}` ,
+      nome_social: `localhost:3333/uploads/${nome_social}`,
+      relatorio_medico: `localhost:3333/uploads/${relatorio_medico}`, 
+      tipagem_sanguinea: `localhost:3333/uploads/${tipagem_sanguinea}`, 
+      cidadao_id }
 
     return res
       .status(200)
@@ -21,7 +34,24 @@ export default {
 
   async SubmeterCertidão ( req: Request, res: Response ) {
 
-    const { barcode, certidao_nascimento } = req.body
+    const { barcode } = req.body
+
+    var certidao_nascimento
+
+    if (req.file == undefined) {
+
+      const { certidao_nascimento: certidaonascimento } = 
+        await Conexao
+          .table('documentos')
+            .select("certidao_nascimento")
+
+      certidao_nascimento = certidaonascimento
+
+    } else {
+
+      certidao_nascimento = req.file.filename
+
+    }
 
     try {
 
@@ -58,7 +88,26 @@ export default {
 
   async SubmeterNomeSocial ( req: Request, res: Response ) {
 
-    const { barcode, nome_social } = req.body
+    const { barcode } = req.body
+
+
+    var nome_social
+
+    if (req.file == undefined) {
+
+      const { nome_social: nomesocial } = 
+        await Conexao
+          .table('documentos')
+            .select("nome_social")
+
+      nome_social = nomesocial
+
+    } else {
+
+      nome_social = req.file.filename
+
+    }
+
 
     try {
 
@@ -93,7 +142,25 @@ export default {
 
   async SubmeterRelatorioMedico ( req: Request, res: Response ) {
 
-    const { barcode, relatorio_medico } = req.body
+    const { barcode } = req.body
+
+    var relatorio_medico
+
+    if (req.file == undefined) {
+
+      const { relatorio_medico: relatoriomedico } = 
+        await Conexao
+          .table('documentos')
+            .select("relatorio_medico")
+
+      relatorio_medico = relatoriomedico
+
+    } else {
+
+      relatorio_medico = req.file.filename
+
+    }
+
 
     try {
 
@@ -130,7 +197,25 @@ export default {
 
   async SubmeterTipagemSanguinea ( req: Request, res: Response ) {
 
-    const { barcode, tipagem_sanguinea } = req.body
+    const { barcode } = req.body
+
+    var tipagem_sanguinea
+
+    if (req.file == undefined) {
+
+      const { tipagem_sanguinea: tipagemsanguinea } = 
+        await Conexao
+          .table('documentos')
+            .select("tipagem_sanguinea")
+
+      tipagem_sanguinea = tipagemsanguinea
+
+    } else {
+
+      tipagem_sanguinea = req.file.filename
+
+    }
+
     
     try {
 

@@ -93,8 +93,8 @@ export default {
    const VerificaUsuario = 
     await Conexao
       .select()
-      .where({ id: barcode})
-        .table("cidadão")
+        .where({ id: barcode})
+          .table("cidadão")
 
         if( VerificaUsuario.length === 0 ){
           return res
