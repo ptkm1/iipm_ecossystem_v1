@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 03-Jan-2021 às 02:32
+-- Tempo de geração: 03-Jan-2021 às 23:57
 -- Versão do servidor: 8.0.22-0ubuntu0.20.04.3
 -- versão do PHP: 7.4.3
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `pedromello`
 --
+CREATE DATABASE IF NOT EXISTS `pedromello` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `pedromello`;
 
 -- --------------------------------------------------------
 
@@ -29,13 +31,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cidadão` (
-  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `id` varchar(100) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `telefone` varchar(100) DEFAULT NULL,
-  `documentos` varchar(100) DEFAULT NULL,
-  `documentos_cidadao` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabela de cidadãos, na qual conectará-se com os documentos e poderá inserir ou visualizar no app.';
+  `email` varchar(100) NOT NULL,
+  `telefone` varchar(100) NOT NULL,
+  `documentos` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -45,10 +46,10 @@ CREATE TABLE `cidadão` (
 
 CREATE TABLE `documentos` (
   `id_documentos` varchar(100) NOT NULL,
-  `certidao_nascimento` varchar(100) DEFAULT NULL,
-  `nome_social` varchar(100) DEFAULT NULL,
-  `relatorio_medico` varchar(100) DEFAULT NULL,
-  `tipagem_sanguinea` varchar(100) DEFAULT NULL,
+  `certidao_nascimento` varchar(255) DEFAULT NULL,
+  `nome_social` varchar(255) DEFAULT NULL,
+  `relatorio_medico` varchar(255) DEFAULT NULL,
+  `tipagem_sanguinea` varchar(255) DEFAULT NULL,
   `cidadao_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -68,6 +69,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Funcionários do ecossistema';
 
 --
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `cidade`, `senha`, `imagem`) VALUES
+('6661b180-14b3-43de-b6a7-642a2ca9c2b8', 'Patrick', 'ptk@gmail.com', 'Salvador', '147258369', '1609727631929-bi94nv722vc51.jpg');
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -75,15 +83,15 @@ CREATE TABLE `usuarios` (
 -- Índices para tabela `cidadão`
 --
 ALTER TABLE `cidadão`
-  ADD UNIQUE KEY `Cidadão_id_IDX` (`id`) USING BTREE,
-  ADD UNIQUE KEY `cidadão_FK` (`documentos`) USING BTREE;
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `documentos` (`documentos`);
 
 --
 -- Índices para tabela `documentos`
 --
 ALTER TABLE `documentos`
   ADD PRIMARY KEY (`id_documentos`),
-  ADD KEY `cidadao_id` (`cidadao_id`);
+  ADD KEY `FK_CidadãoDoc` (`cidadao_id`);
 
 --
 -- Índices para tabela `usuarios`
@@ -96,18 +104,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- Limitadores para a tabela `cidadão`
---
-ALTER TABLE `cidadão`
-  ADD CONSTRAINT `cidadão_FK` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cidadão_ibfk_1` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`),
-  ADD CONSTRAINT `FK_CidadaoDocumentos` FOREIGN KEY (`documentos`) REFERENCES `documentos` (`id_documentos`);
-
---
 -- Limitadores para a tabela `documentos`
 --
 ALTER TABLE `documentos`
-  ADD CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`cidadao_id`) REFERENCES `cidadão` (`id`);
+  ADD CONSTRAINT `FK_CidadãoDoc` FOREIGN KEY (`cidadao_id`) REFERENCES `cidadão` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

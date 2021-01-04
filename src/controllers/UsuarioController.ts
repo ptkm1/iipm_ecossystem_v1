@@ -1,11 +1,12 @@
 import { Request, Response } from "express"
 import { Conexao } from "../configs/ConexaoDB"
+import bcrypt from 'bcryptjs'
 // import EmailService from "../services/EmailService"
 
 import { v4 } from 'uuid'
 
 
-export default {
+class UsuarioController {
 
   async Index( req: Request, res: Response ) {
     const data = 
@@ -14,7 +15,7 @@ export default {
           .table('usuarios') //Trocar para tabela usuarios dps de criar
 
     return res.send(data)
-  },
+  }
   
   async UsuarioEspecífico( req: Request, res: Response ) {
 
@@ -54,7 +55,7 @@ export default {
       
     }
 
-  },
+  }
 
   async Create( req: Request, res: Response ) {
     const { nome, email, cidade, senha } = req.body
@@ -65,7 +66,7 @@ export default {
     { id: v4(),
       nome,
       email,
-      senha,
+      senha: bcrypt.hashSync(senha, 8),
       cidade,
       imagem: image.filename }
 
@@ -87,7 +88,7 @@ export default {
 
       }
 
-  },
+  }
 
 
   async AtualizarUsuario( req: Request, res: Response ) {
@@ -113,10 +114,10 @@ export default {
     }
 
     const data = 
-    { nome: "ptktesteaaaaaaaa",
-      email: "pteste@gmail.c",
-      cidade: "salcity",
-      senha: "505050",
+    { nome,
+      email,
+      cidade,
+      senha,
       imagem: image }
 
     try {
@@ -136,7 +137,7 @@ export default {
             .send({ mensagem: "Não foi possível atualizar o usuário" })
     }
 
-  },
+  }
 
   async DeletarUsuario( req: Request, res: Response ) {
 
@@ -161,7 +162,7 @@ export default {
 
     }
 
-  },
+  }
 
   // async Mail( req: Request, res: Response ) {
 
@@ -178,3 +179,5 @@ export default {
   // }
 
 }
+
+export default new UsuarioController()

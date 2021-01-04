@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { Conexao } from "../configs/ConexaoDB"
 
-export default {
+class DocumentoController {
   
   async Index ( req: Request, res: Response ) {
 
@@ -30,7 +30,7 @@ export default {
       .status(200)
         .send(data)
 
-  },
+  }
 
   async SubmeterCertidão ( req: Request, res: Response ) {
 
@@ -84,7 +84,7 @@ export default {
 
     }
 
-  },
+  }
 
   async SubmeterNomeSocial ( req: Request, res: Response ) {
 
@@ -138,7 +138,7 @@ export default {
 
     }
 
-  },
+  }
 
   async SubmeterRelatorioMedico ( req: Request, res: Response ) {
 
@@ -193,7 +193,7 @@ export default {
 
     }
 
-  },
+  }
 
   async SubmeterTipagemSanguinea ( req: Request, res: Response ) {
 
@@ -251,3 +251,5 @@ export default {
   }
 
 }
+
+export default new DocumentoController()

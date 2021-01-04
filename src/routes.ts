@@ -13,6 +13,7 @@ import MulterConfig from './configs/MulterConfig'
 
 import multer from 'multer'
 import sharp from 'sharp'
+import AutenticacaoController from './controllers/AutenticacaoController'
 
 const upload = multer( MulterConfig )
 
@@ -42,8 +43,10 @@ rotas.post('/usuarios/criar', upload.single('image'), UsuarioController.Create)
 rotas.delete('/usuarios/:barcode', UsuarioController.DeletarUsuario)
 rotas.put('/usuarios/:barcode', upload.single('image'), UsuarioController.AtualizarUsuario)
 
+rotas.post('/autenticar', AutenticacaoController.AutenticarUsuario)
 
-//  Rota teste
+
+//  Rota teste de Redução de tamanho de foto, *funcionando*
 rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response) =>{
 
   const nome = req.body.nome

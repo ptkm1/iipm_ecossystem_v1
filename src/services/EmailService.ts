@@ -1,12 +1,12 @@
 interface IMailPara {
-  nome: string;
-  email: string;
+  nome: string
+  email: string
 }
 
 interface IMailMensagem {
-  subject: string;
-  body: string;
-  attachment?: string[];
+  subject: string
+  body: string
+  attachment?: string[]
 }
 
 interface MensagemDTO {

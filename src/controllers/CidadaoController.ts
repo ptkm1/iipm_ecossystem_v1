@@ -3,7 +3,7 @@ import { Conexao } from "../configs/ConexaoDB"
 
 import { v4 } from "uuid"
 
-export default {
+class CidadãoController {
 
   async Index ( req: Request, res: Response ) {
 
@@ -16,7 +16,7 @@ export default {
       .status(200)
         .send(data)
 
-  },
+  }
   
   async Create ( req: Request, res: Response ) {
 
@@ -30,7 +30,8 @@ export default {
       { id,
         nome,
         email,
-        telefone }
+        telefone,
+        documentos: id }
       
       const DocumentosDefault = 
       { id_documentos: id,
@@ -52,14 +53,14 @@ export default {
         .status(200)
           .send({ mensagem: "Cidadão cadastrado" })
 
-    } catch {
+    } catch (error) {
 
       return res
         .status(401)
-          .send({ mensagem: "não foi possível cadastrar" })
+          .send({ mensagem: "não foi possível cadastrar", error })
 
     }
-  },
+  }
 
   async ProcurarPorBarcode ( req: Request, res: Response ) {
 
@@ -82,7 +83,7 @@ export default {
         .send({ mensagem: "Cidadão Encontrado" ,
                 Cidadão: RetornoDoBanco })
 
-  },
+  }
 
   async DeletarCidadaoPorBarcode ( req: Request, res: Response ) {
 
@@ -118,7 +119,7 @@ export default {
           .send({ mensagem: "Não foi possivel deletar" })
    }
 
-  },
+  }
 
   async UpdateCidadaoPorBarcode ( req: Request, res: Response ) {
 
@@ -151,3 +152,5 @@ export default {
 
   }
 }
+
+export default new CidadãoController
