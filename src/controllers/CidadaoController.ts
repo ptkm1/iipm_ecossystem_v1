@@ -1,13 +1,13 @@
 import { Request, Response } from "express"
+import { v4 } from "uuid"
 import { Conexao } from "../configs/ConexaoDB"
 
-import { v4 } from "uuid"
 
 class CidadãoController {
 
   async Index ( req: Request, res: Response ) {
 
-    const data = 
+    const data =
     await Conexao
       .select("*")
         .table("cidadão")
@@ -17,7 +17,7 @@ class CidadãoController {
         .send(data)
 
   }
-  
+
   async Create ( req: Request, res: Response ) {
 
     const { nome, email, telefone } = req.body
@@ -26,14 +26,14 @@ class CidadãoController {
 
     try {
 
-      const data = 
+      const data =
       { id,
         nome,
         email,
         telefone,
         documentos: id }
-      
-      const DocumentosDefault = 
+
+      const DocumentosDefault =
       { id_documentos: id,
         certidao_nascimento: "",
         nome_social: "",
@@ -66,7 +66,7 @@ class CidadãoController {
 
     const { barcode } = req.params
 
-    const RetornoDoBanco = 
+    const RetornoDoBanco =
     await Conexao
     .select()
       .where("id",barcode) // Trocar o campo id por barcode depois...
@@ -91,7 +91,7 @@ class CidadãoController {
 
    try {
 
-   const VerificaUsuario = 
+   const VerificaUsuario =
     await Conexao
       .select()
         .where({ id: barcode})
@@ -127,7 +127,7 @@ class CidadãoController {
 
     const { nome, email, telefone } = req.params
 
-    const data = 
+    const data =
     { nome,
       email,
       telefone }
@@ -138,13 +138,13 @@ class CidadãoController {
        .table('cidadão')
          .where({ id: barcode }) // Trocar o campo id por barcode depois...
            .update(data)
- 
+
         return res
           .status(200)
             .send({ mensagem: "Cidadão Atualizado com sucesso" })
- 
+
     } catch {
- 
+
        return res
          .status(404)
            .send({ mensagem: "Não foi possivel atualizar o Cidadão" })
@@ -153,4 +153,4 @@ class CidadãoController {
   }
 }
 
-export default new CidadãoController
+export default new CidadãoController()

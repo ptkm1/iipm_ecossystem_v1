@@ -1,42 +1,41 @@
-import { Request, Response } from "express"
-import { Conexao } from "../configs/ConexaoDB"
 import bcrypt from 'bcryptjs'
+import { Request, Response } from "express"
 // import EmailService from "../services/EmailService"
-
 import { v4 } from 'uuid'
+import { Conexao } from "../configs/ConexaoDB"
 
 
 class UsuarioController {
 
   async Index( req: Request, res: Response ) {
-    const data = 
+    const data =
       await Conexao
         .select('*')
           .table('usuarios') //Trocar para tabela usuarios dps de criar
 
     return res.send(data)
   }
-  
+
   async UsuarioEspecífico( req: Request, res: Response ) {
 
     const { barcode } = req.params
-  
+
     try {
-       
-    const 
+
+    const
     { id,
       nome,
       email,
       cidade,
-      imagem } = 
+      imagem } =
     await Conexao
       .select('*')
         .where({ id: barcode })
           .table('usuarios')
             .first()
 
-    // Tratando um objeto para enviar para o front-end com a url da foto            
-    const data = 
+    // Tratando um objeto para enviar para o front-end com a url da foto
+    const data =
     { id,
       nome,
       email,
@@ -52,7 +51,7 @@ class UsuarioController {
     return res
       .status(404)
         .send({ mensagem: "Não foi possível criar um usuário" })
-      
+
     }
 
   }
@@ -62,7 +61,7 @@ class UsuarioController {
 
     const image = req.file
 
-    const data = 
+    const data =
     { id: v4(),
       nome,
       email,
@@ -101,7 +100,7 @@ class UsuarioController {
 
     if (req.file == undefined) {
 
-      const { imagem } = 
+      const { imagem } =
         await Conexao
           .table('usuarios')
             .select("imagem")
@@ -113,7 +112,7 @@ class UsuarioController {
         image = req.file.filename
     }
 
-    const data = 
+    const data =
     { nome,
       email,
       cidade,
@@ -121,7 +120,7 @@ class UsuarioController {
       imagem: image }
 
     try {
-      
+
       await Conexao
         .table("usuarios")
           .where({ id: barcode })
@@ -149,13 +148,13 @@ class UsuarioController {
         .table("usuarios")
           .where({ id: barcode })
             .delete()
-      
+
       return res
         .status(200)
           .send({ mensagem: "Usuário deletado com sucesso" })
 
     } catch {
-      
+
       return res
         .status(401)
           .send({ mensagem: "Não foi possível deletar usuário" })

@@ -5,8 +5,8 @@ export const Conexao = Knex({
   connection: {
     host : 'localhost',
     port: 3306,
-    user : 'ptkm1',
-    password : '87127186',
+    user : 'root',
+    password : '',
     database : 'pedromello'
   }
 })

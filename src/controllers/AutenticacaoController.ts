@@ -1,21 +1,21 @@
-import { Request, Response } from "express"
-import { Conexao } from "../configs/ConexaoDB"
 import bcrypt from 'bcryptjs'
+import { Request, Response } from "express"
 import jwt from 'jsonwebtoken'
+import { Conexao } from "../configs/ConexaoDB"
 
 class AutenticacaoController {
-  
-  async AutenticarUsuario( req: Request, res: Response ) {
+
+  async AutenticarUsuario( req: Request, res: Response ): Promise<Response> {
     const { email: emailInputado, senha } = req.body
 
-    const Usuario = 
+    const Usuario:any =
       await Conexao
         .table("usuarios")
           .where({ email: emailInputado })
             .select('*')
               .first()
 
-    const data = 
+    const data =
     { id: Usuario.id,
       nome: Usuario.nome,
       email: Usuario.email,
@@ -42,8 +42,7 @@ class AutenticacaoController {
     .sign({ id: Usuario.id },
             'secret',
             { expiresIn: '1d' })
-      
-    
+
     return res
       .status(200)
         .send({ mensagem: "Autenticado", token, data })

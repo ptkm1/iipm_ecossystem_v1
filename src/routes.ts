@@ -1,19 +1,20 @@
-import { Router, Request, Response } from 'express'
-const rotas = Router()
-
+import { Request, Response, Router } from 'express'
 import fs from 'fs'
+import multer from 'multer'
 import path from 'path'
-
-// [Controllers]
-import UsuarioController from './controllers/UsuarioController'
+import sharp from 'sharp'
+import MulterConfig from './configs/MulterConfig'
+import AutenticacaoController from './controllers/AutenticacaoController'
 import CidadaoController from './controllers/CidadaoController'
 import DocumentoController from './controllers/DocumentoController'
-import MulterConfig from './configs/MulterConfig'
+import RegistroRGBD from './controllers/RegistroRGBD'
+// [Controllers]
+import UsuarioController from './controllers/UsuarioController'
+const rotas = Router()
 
 
-import multer from 'multer'
-import sharp from 'sharp'
-import AutenticacaoController from './controllers/AutenticacaoController'
+
+
 
 const upload = multer( MulterConfig )
 
@@ -45,6 +46,15 @@ rotas.put('/usuarios/:barcode', upload.single('image'), UsuarioController.Atuali
 
 rotas.post('/autenticar', AutenticacaoController.AutenticarUsuario)
 
+/* [ROTAS DO SEAP] */
+
+rotas.get('/registrorgbd', RegistroRGBD.Index)
+rotas.post('/pesquisar', RegistroRGBD.ProcurarPorNome)
+rotas.post('/registrorgbd', RegistroRGBD.Registrar)
+rotas.get('/registro/:id', RegistroRGBD.buscarPorID)
+rotas.post('/registro1via', RegistroRGBD.EditarPorID)
+
+
 
 //  Rota teste de Redução de tamanho de foto, *funcionando*
 rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response) =>{
@@ -59,9 +69,9 @@ rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response
    * se ele já exisir, ele cai no else
    */
 
-  fs.access(`/uploads/${nome}`, err => { 
+  fs.access(`/uploads/${nome}`, err => {
 
-    if(err){ 
+    if(err){
 
       fs.mkdirSync(__dirname+`/uploads/${nome}`)
 
@@ -77,7 +87,9 @@ rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response
     .resize(1000)
     .toFile(path.join(__dirname, 'uploads', nome , barcode + '.jpeg' ))
 
-    res.status(200).json({ mensagem: "upload feito com sucesso" })
+    return res
+      .status(200)
+        .send({ mensagem: "upload feito com sucesso" })
 } )
 
 
