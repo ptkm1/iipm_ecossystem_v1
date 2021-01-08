@@ -116,6 +116,19 @@ class RegistroRGBD {
     }
   }
 
+  async BuscarEstados( req: Request, res: Response ) {
+
+    const data =
+      await Conexao
+        .select()
+          .into('estado')
+
+    return res
+      .status(200)
+        .send(data)
+
+  }
+
 
 }
 

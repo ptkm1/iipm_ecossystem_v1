@@ -53,6 +53,7 @@ rotas.post('/pesquisar', RegistroRGBD.ProcurarPorNome)
 rotas.post('/registrorgbd', RegistroRGBD.Registrar)
 rotas.get('/registro/:id', RegistroRGBD.buscarPorID)
 rotas.post('/registro1via', RegistroRGBD.EditarPorID)
+rotas.get('/estados', RegistroRGBD.BuscarEstados)
 
 
 

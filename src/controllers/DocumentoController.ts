@@ -2,28 +2,28 @@ import { Request, Response } from "express"
 import { Conexao } from "../configs/ConexaoDB"
 
 class DocumentoController {
-  
+
   async Index ( req: Request, res: Response ) {
 
     const { barcode } = req.body
 
-    const { 
-      certidao_nascimento, 
-      nome_social, 
-      relatorio_medico, 
-      tipagem_sanguinea, 
-      cidadao_id } = 
+    const {
+      certidao_nascimento,
+      nome_social,
+      relatorio_medico,
+      tipagem_sanguinea,
+      cidadao_id } =
      await Conexao
       .select()
         .where('cidadao_id', barcode)
           .table("documentos")
             .first()
 
-    const data = 
-    { certidao_nascimento: `localhost:3333/uploads/${certidao_nascimento}` ,
-      nome_social: `localhost:3333/uploads/${nome_social}`,
-      relatorio_medico: `localhost:3333/uploads/${relatorio_medico}`, 
-      tipagem_sanguinea: `localhost:3333/uploads/${tipagem_sanguinea}`, 
+    const data =
+    { certidao_nascimento: `http://localhost:3333/uploads/${certidao_nascimento}` ,
+      nome_social: `http://localhost:3333/uploads/${nome_social}`,
+      relatorio_medico: `http://localhost:3333/uploads/${relatorio_medico}`,
+      tipagem_sanguinea: `http://localhost:3333/uploads/${tipagem_sanguinea}`,
       cidadao_id }
 
     return res
@@ -37,10 +37,11 @@ class DocumentoController {
     const { barcode } = req.body
 
     var certidao_nascimento
+    console.log(req.file)
 
     if (req.file == undefined) {
 
-      const { certidao_nascimento: certidaonascimento } = 
+      const { certidao_nascimento: certidaonascimento } =
         await Conexao
           .table('documentos')
             .select("certidao_nascimento")
@@ -55,22 +56,21 @@ class DocumentoController {
 
     try {
 
-      const VerificaSeExiste = 
+      const VerificaSeExiste =
       await Conexao
         .select()
           .where("cidadao_id", barcode)
             .into("documentos")
-      
+
       if( VerificaSeExiste.length === 0 )
         throw new Error("Não foi possível achar o cidadão no banco")
-      
+
 
       await Conexao
         .update({ certidao_nascimento })
           .where("cidadao_id", barcode)
             .table("documentos")
 
-          
 
       return res
         .status(200)
@@ -95,7 +95,7 @@ class DocumentoController {
 
     if (req.file == undefined) {
 
-      const { nome_social: nomesocial } = 
+      const { nome_social: nomesocial } =
         await Conexao
           .table('documentos')
             .select("nome_social")
@@ -111,15 +111,14 @@ class DocumentoController {
 
     try {
 
-      const VerificaSeExiste = 
+      const VerificaSeExiste =
       await Conexao
         .select()
           .where("cidadao_id", barcode)
             .into("documentos")
-      
+
       if(VerificaSeExiste.length === 0)
         throw new Error()
-      
 
       await Conexao
         .update({ nome_social })
@@ -148,7 +147,7 @@ class DocumentoController {
 
     if (req.file == undefined) {
 
-      const { relatorio_medico: relatoriomedico } = 
+      const { relatorio_medico: relatoriomedico } =
         await Conexao
           .table('documentos')
             .select("relatorio_medico")
@@ -164,22 +163,20 @@ class DocumentoController {
 
     try {
 
-      const VerificaSeExiste = 
+      const VerificaSeExiste =
       await Conexao
         .select()
           .where("cidadao_id", barcode)
             .into("documentos")
-      
+
       if( VerificaSeExiste.length === 0 )
         throw new Error("Não foi possível achar o cidadão no banco")
-      
 
       await Conexao
         .update({ relatorio_medico })
           .where("cidadao_id", barcode)
             .table("documentos")
 
-          
 
       return res
         .status(200)
@@ -203,7 +200,7 @@ class DocumentoController {
 
     if (req.file == undefined) {
 
-      const { tipagem_sanguinea: tipagemsanguinea } = 
+      const { tipagem_sanguinea: tipagemsanguinea } =
         await Conexao
           .table('documentos')
             .select("tipagem_sanguinea")
@@ -216,25 +213,23 @@ class DocumentoController {
 
     }
 
-    
     try {
 
-      const VerificaSeExiste = 
+      const VerificaSeExiste =
       await Conexao
         .select()
           .where("cidadao_id", barcode)
             .into("documentos")
-      
+
       if( VerificaSeExiste.length === 0 )
         throw new Error("Não foi possível achar o cidadão no banco")
-      
+
 
       await Conexao
         .update({ tipagem_sanguinea })
           .where("cidadao_id", barcode)
             .table("documentos")
 
-          
 
       return res
         .status(200)

@@ -26,7 +26,7 @@ class UsuarioController {
     { id,
       nome,
       email,
-      cidade,
+      posto,
       imagem } =
     await Conexao
       .select('*')
@@ -39,7 +39,7 @@ class UsuarioController {
     { id,
       nome,
       email,
-      cidade,
+      posto,
       imagem: `localhost:3333/uploads/${imagem}` }
 
     return res
@@ -57,7 +57,7 @@ class UsuarioController {
   }
 
   async Create( req: Request, res: Response ) {
-    const { nome, email, cidade, senha } = req.body
+    const { nome, email, posto, senha } = req.body
 
     const image = req.file
 
@@ -66,7 +66,7 @@ class UsuarioController {
       nome,
       email,
       senha: bcrypt.hashSync(senha, 8),
-      cidade,
+      posto,
       imagem: image.filename }
 
       try {
@@ -94,7 +94,7 @@ class UsuarioController {
 
     const { barcode } = req.params
 
-    const { nome, email, cidade, senha } = req.body
+    const { nome, email, posto, senha } = req.body
 
     var image
 
@@ -115,7 +115,7 @@ class UsuarioController {
     const data =
     { nome,
       email,
-      cidade,
+      posto,
       senha,
       imagem: image }
 
