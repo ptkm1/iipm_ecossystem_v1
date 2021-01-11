@@ -1,5 +1,4 @@
 import { Request, Response } from "express"
-import { v4 } from "uuid"
 import { Conexao } from "../configs/ConexaoDB"
 
 
@@ -22,7 +21,7 @@ class CidadãoController {
 
     const { nome, email, telefone } = req.body
 
-    const id = v4()
+    const id = "320171409523." //v4()
 
     try {
 

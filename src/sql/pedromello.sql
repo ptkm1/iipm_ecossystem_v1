@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Jan-2021 às 20:27
+-- Tempo de geração: 11-Jan-2021 às 19:19
 -- Versão do servidor: 10.4.14-MariaDB
 -- versão do PHP: 7.2.34
 
@@ -35,13 +35,6 @@ CREATE TABLE `cidadão` (
   `documentos` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `cidadão`
---
-
-INSERT INTO `cidadão` (`id`, `nome`, `email`, `telefone`, `documentos`) VALUES
-('3a035b2e-53ee-4c9a-b081-68b9f1a7acde', 'Antônio Sande', 'Antonio@gmail.com', '71718585858', '3a035b2e-53ee-4c9a-b081-68b9f1a7acde');
-
 -- --------------------------------------------------------
 
 --
@@ -56,13 +49,6 @@ CREATE TABLE `documentos` (
   `tipagem_sanguinea` varchar(255) DEFAULT NULL,
   `cidadao_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `documentos`
---
-
-INSERT INTO `documentos` (`id_documentos`, `certidao_nascimento`, `nome_social`, `relatorio_medico`, `tipagem_sanguinea`, `cidadao_id`) VALUES
-('3a035b2e-53ee-4c9a-b081-68b9f1a7acde', '', '', '', '', '3a035b2e-53ee-4c9a-b081-68b9f1a7acde');
 
 -- --------------------------------------------------------
 
@@ -105,6 +91,7 @@ CREATE TABLE `registrorgbd` (
   `TipoOlhos` varchar(100) NOT NULL,
   `Barba` varchar(100) NOT NULL,
   `Bigode` varchar(100) NOT NULL,
+  `Anomalias` varchar(255) NOT NULL,
   `Numero` varchar(100) NOT NULL,
   `Endereco` varchar(100) NOT NULL,
   `Complemento` varchar(100) NOT NULL,
@@ -114,14 +101,6 @@ CREATE TABLE `registrorgbd` (
   `Cidade` varchar(100) NOT NULL,
   `Observaçao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `registrorgbd`
---
-
-INSERT INTO `registrorgbd` (`id`, `NRG`, `Via`, `Isençao`, `Result`, `Usuario`, `Posto`, `NomeCompleto`, `NomePai`, `NomeMae`, `DataNasc`, `Cpf`, `Pis`, `Tel`, `Sexo`, `Instruçao`, `Profissao`, `EstadoCivil`, `Certidao`, `Comarca`, `Distrito`, `Livro`, `Folha`, `Termo`, `DataRegistro`, `DataCertidao`, `Altura`, `Cutis`, `CorCabelo`, `TipoCabelo`, `CorOlhos`, `TipoOlhos`, `Barba`, `Bigode`, `Numero`, `Endereco`, `Complemento`, `Bairro`, `Cep`, `Estado`, `Cidade`, `Observaçao`) VALUES
-('', '8585858', '1156', '0', '24524', 'aeawe', 'aweawe', 'aweawe', 'aweawe', 'aweawea', '2021-01-06', 'eaweawe', 'aweae', 'ewaeawe', 'aweawe', '0', '0', '0', '0', 'ew121e12', 'e21e12e', '12e12e', '', '12e12e', '2020-12-29', '2021-01-13', 'e12e1e', '0', '0', '', '0', '0', '0', '0', '85', '21eqwewae', 'eqwewqe', 'aweaweawe', 'aweaweawe', '0', '0', 'eaweaweawea'),
-('db259bbf-0af9-40cf-96e9-330817842c28', '8585858', '1156', '0', '24524', 'aeawe', 'aweawe', 'desktp/nomedaimagem.png', 'aweawe', 'aweawea', '2021-01-06', 'eaweawe', 'aweae', 'ewaeawe', 'aweawe', '0', '0', '0', '0', 'ew121e12', 'e21e12e', '12e12e', '', '12e12e', '2020-12-29', '2021-01-13', 'e12e1e', '0', '0', '', '0', '0', '0', '0', '85', '21eqwewae', 'eqwewqe', 'aweaweawe', 'aweaweawe', '0', '0', 'eaweaweawea');
 
 -- --------------------------------------------------------
 
@@ -133,7 +112,7 @@ CREATE TABLE `usuarios` (
   `id` varchar(100) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `cidade` varchar(255) DEFAULT NULL,
+  `posto` varchar(255) DEFAULT NULL,
   `senha` varchar(255) NOT NULL,
   `imagem` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -142,8 +121,8 @@ CREATE TABLE `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `cidade`, `senha`, `imagem`) VALUES
-('2953bb22-5a96-4702-b075-08c77ca6b23d', 'Patrick', 'ptk@gmail.com', 'Salvador', '$2a$08$6tQxW.Vuhfal3XurzZqrL.XK.SlsvS1.gs4GmlHl7Cvzsh.BWt0HO', '1609757793444-pexels-harry-cooke-6194910.jpg');
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `posto`, `senha`, `imagem`) VALUES
+('8de50693-1058-4dbf-b2f9-4cdb21232a5c', 'Patrick', 'ptk@gmail.com', 'Salvador', '$2a$08$qJqBzJ10ulZd9VYAS/ZVjeft7pBpyJM6JgnubWBLYMmuRzkPOS9su', '1610021546370-pexels-harry-cooke-6194910.jpg');
 
 --
 -- Índices para tabelas despejadas
