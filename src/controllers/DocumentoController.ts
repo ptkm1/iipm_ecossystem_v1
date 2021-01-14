@@ -20,10 +20,10 @@ class DocumentoController {
             .first()
 
     const data =
-    { certidao_nascimento: `http://192.168.0.107:3333/uploads/${certidao_nascimento}` ,
-      nome_social: `http://192.168.0.107:3333/uploads/${nome_social}`,
-      relatorio_medico: `http://192.168.0.107:3333/uploads/${relatorio_medico}`,
-      tipagem_sanguinea: `http://192.168.0.107:3333/uploads/${tipagem_sanguinea}`,
+    { certidao_nascimento: `http://192.168.0.103:3333/uploads/${certidao_nascimento}` ,
+      nome_social: `http://192.168.0.103:3333/uploads/${nome_social}`,
+      relatorio_medico: `http://192.168.0.103:3333/uploads/${relatorio_medico}`,
+      tipagem_sanguinea: `http://192.168.0.103:3333/uploads/${tipagem_sanguinea}`,
       cidadao_id }
 
     return res

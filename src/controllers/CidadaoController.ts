@@ -19,9 +19,7 @@ class CidadãoController {
 
   async Create ( req: Request, res: Response ) {
 
-    const { nome, email, telefone } = req.body
-
-    const id = "320171409523." //v4()
+    const { id, nome, email, telefone } = req.body
 
     try {
 

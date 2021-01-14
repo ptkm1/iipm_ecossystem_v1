@@ -63,13 +63,6 @@ rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response
   const nome = req.body.nome
   const barcode = req.body.barcode
 
-  /**
-   * [ANOTAÇÕES IMPORTANTES]
-   * o metodo access vai acessar a pasta, e procurar pelo /uploads/nome
-   * e ver se existe, se ele n existe, ele cai no 1º if
-   * se ele já exisir, ele cai no else
-   */
-
   fs.access(`/uploads/${nome}`, err => {
 
     if(err){

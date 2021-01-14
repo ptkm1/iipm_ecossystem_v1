@@ -40,7 +40,7 @@ class UsuarioController {
       nome,
       email,
       posto,
-      imagem: `localhost:3333/uploads/${imagem}` }
+      imagem: `http://192.168.0.100:3333/uploads/${imagem}` }
 
     return res
       .status(200)

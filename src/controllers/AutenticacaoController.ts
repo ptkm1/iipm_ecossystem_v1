@@ -16,7 +16,7 @@ class AutenticacaoController {
 				nome: Usuario.nome,
 				email: Usuario.email,
 				posto: Usuario.posto,
-				imagem: `http://localhost:3333/uploads/${Usuario.imagem}`
+				imagem: `http://192.168.0.100:3333/uploads/${Usuario.imagem}`
 			}
 
 			if (Usuario.length === 0) {
