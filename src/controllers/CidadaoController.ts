@@ -19,14 +19,14 @@ class CidadãoController {
 
   async Create ( req: Request, res: Response ) {
 
-    const { id, nome, email, telefone } = req.body
+    const { id, nome, rg, telefone } = req.body
 
     try {
 
       const data =
       { id,
         nome,
-        email,
+        rg,
         telefone,
         documentos: id }
 
@@ -122,11 +122,11 @@ class CidadãoController {
 
     const { barcode } = req.params
 
-    const { nome, email, telefone } = req.params
+    const { nome, rg, telefone } = req.body
 
     const data =
     { nome,
-      email,
+      rg,
       telefone }
 
     try {
