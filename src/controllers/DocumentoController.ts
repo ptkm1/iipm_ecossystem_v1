@@ -7,6 +7,8 @@ class DocumentoController {
 
     const { barcode } = req.body
 
+    console.log(barcode)
+
     const {
       certidao_nascimento,
       nome_social,
@@ -20,10 +22,10 @@ class DocumentoController {
             .first()
 
     const data =
-    { certidao_nascimento: `http://192.168.0.103:3333/uploads/${certidao_nascimento}` ,
-      nome_social: `http://192.168.0.103:3333/uploads/${nome_social}`,
-      relatorio_medico: `http://192.168.0.103:3333/uploads/${relatorio_medico}`,
-      tipagem_sanguinea: `http://192.168.0.103:3333/uploads/${tipagem_sanguinea}`,
+    { certidao_nascimento: `http://192.168.0.105:3333/uploads/${certidao_nascimento}` ,
+      nome_social: `http://192.168.0.105:3333/uploads/${nome_social}`,
+      relatorio_medico: `http://192.168.0.105:3333/uploads/${relatorio_medico}`,
+      tipagem_sanguinea: `http://192.168.0.105:3333/uploads/${tipagem_sanguinea}`,
       cidadao_id }
 
     return res
@@ -37,7 +39,6 @@ class DocumentoController {
     const { barcode } = req.body
 
     var certidao_nascimento
-    console.log(req.file)
 
     if (req.file == undefined) {
 
