@@ -6,6 +6,7 @@ import sharp from 'sharp'
 import MulterConfig from './configs/MulterConfig'
 import AutenticacaoController from './controllers/AutenticacaoController'
 import CidadaoController from './controllers/CidadaoController'
+import TabelasController from './controllers/CSVImport/TabelasController'
 import DocumentoController from './controllers/DocumentoController'
 import RegistroRGBD from './controllers/RegistroRGBD'
 // [Controllers]
@@ -13,10 +14,13 @@ import UsuarioController from './controllers/UsuarioController'
 const rotas = Router()
 
 
-
-
-
 const upload = multer( MulterConfig )
+
+
+/* [ROTAS DO CSVIMPORT] */
+
+rotas.get('/csvs', TabelasController.Index)
+
 
 
 /* [ROTAS DE CIDADÃO] */
