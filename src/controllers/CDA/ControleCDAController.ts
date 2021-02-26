@@ -11,14 +11,14 @@ class ControleCDAController {
 
       const data =
         await Conexao
-          .table("produtivedade_diaria")
+          .table("produtividade_diaria")
             .where({ data_de_identificacao: data_prestacao })
               .select()
 
       if (!data) throw new Error()
 
       return res
-        .send(data)
+        .send({ objeto: data, data_escolhida: data_prestacao })
 
     } catch {
 
@@ -44,7 +44,16 @@ class ControleCDAController {
       status_insercao 
     } = req.body
 
-    const data = { }
+    const data = { 
+      status_do_pagamento,
+      nosso_numero,
+      cnpj_ssp,
+      cpf, 
+      cpf_ou_cnpj, 
+      data_de_pagamento, 
+      tipo_dtx, 
+      status_insercao
+    }
 
     try {
 
