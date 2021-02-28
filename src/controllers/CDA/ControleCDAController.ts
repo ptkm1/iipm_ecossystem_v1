@@ -41,7 +41,9 @@ class ControleCDAController {
       cpf_ou_cnpj, 
       data_de_pagamento, 
       tipo_dtx, 
-      status_insercao 
+      status_insercao,
+      situacao_isento,
+      observacao_isento
     } = req.body
 
     const data = { 
@@ -52,15 +54,17 @@ class ControleCDAController {
       cpf_ou_cnpj, 
       data_de_pagamento, 
       tipo_dtx, 
-      status_insercao
+      status_insercao,
+      situacao_isento,
+      observacao_isento
     }
 
     try {
 
       const response = 
         await Conexao
-          .table("produtivedade_diaria")
-            .where({ id })
+          .table("produtividade_diaria")
+            .where({ id: id })
               .update(data)
 
       if(!response) throw new Error()
@@ -73,7 +77,7 @@ class ControleCDAController {
 
       return res
         .status(401)
-          .send({ mensagem: "Atualizado com sucesso" })
+          .send({ mensagem: "Não foi possível atualizar a coluna!" })
     }
 
   }

@@ -29,20 +29,19 @@ class UsuariosCDAController {
 
     const { nome, senha, posto } = req.body
 
-    console.log(nome)
-
     const data = {
       id: v4(),
-      nome:nome,
-      senha:bcrypt.hashSync(senha, 8),
+      nome,
+      senha,
       posto
     }
 
     try {
 
-      const response = await Conexao
-        .table("usuarios_CDA")
-          .insert(data)
+      const response = 
+        await Conexao
+          .table("usuarios_CDA")
+            .insert(data)
 
       if(!response) throw new Error()
 
