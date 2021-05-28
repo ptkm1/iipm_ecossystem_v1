@@ -1,0 +1,513 @@
+#nrg {
+  display: none;
+  position: fixed;
+  top: 400px;
+  left: 110px;
+  z-index: 50;
+}
+
+#nomecompleto {
+  display: none;
+  position: fixed;
+
+  top: 426px;
+  left: 110px;
+  z-index: 50;
+}
+
+#posto2 {
+  display: none;
+  position: fixed;
+  top: 478px;
+  left: 110px;
+  z-index: 50;
+}
+
+#ImagemCid {
+  display: none;
+  position: fixed;
+  top: 472px;
+  left: 120px;
+  z-index: 80;
+}
+
+#DiaAtual {
+  display: none;
+}
+
+
+#DiaAtual1 {
+  display: none;
+}
+
+
+@media print {
+  * {
+    background: transparent;
+    color: #000;
+    text-shadow: none;
+    filter: none;
+    -ms-filter: none;
+    border: none;
+    font-size: 10px;
+  }
+
+  .noprint {
+    display: none;
+  }
+
+  select {
+    -webkit-appearance: none !important;
+    -webkit-border-radius: 0px;
+    border: none;
+    box-shadow: none;
+  }
+
+  #rg {
+    position: fixed;
+    top: 10px;
+    left: 40px;
+    height: max-content;
+    width: max-content;
+  }
+  #nome_completo {
+    position: fixed;
+    top: 39px;
+    left: 40px;
+    height: max-content;
+    width: max-content;
+  }
+  #nome_pai {
+    position: fixed;
+    top: 57px;
+    left: 40px;
+    height: max-content;
+    width: max-content;
+  }
+  #nome_mae {
+    position: fixed;
+    top: 80px;
+    left: 40px;
+    height: max-content;
+    width: max-content;
+  }
+  #data_nascimento {
+    position: fixed;
+    top: 105px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #sexo {
+    position: fixed;
+    top: 105px;
+    left: 425px;
+    height: max-content;
+    width: max-content;
+  }
+  #estado_civil {
+    position: fixed;
+    top: 131px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #ImagemCid { 
+    position: fixed;
+    top: 106px;
+    left: 621px;
+
+    display: block;
+    z-index: 50;
+    width: 3cm;
+    height: 4cm;
+    object-fit: fill;
+  }
+  #via {
+    position: fixed;
+    z-index: 50;
+    top: 131px;
+    left: 425px;
+    height: max-content;
+    width: max-content;
+  }
+  #instruçao {
+    position: fixed;
+    top: 154px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #profissao {
+    position: fixed;
+    top: 174px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #estado {
+    position: fixed;
+    top: 198px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #cidade {
+    position: fixed;
+    top: 198px;
+    left: 350px;
+    height: max-content;
+    width: max-content;
+  }
+  #pis {
+    position: fixed;
+    top: 222px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #cpf {
+    position: fixed;
+    top: 240px;
+    left: 215px;
+    height: max-content;
+    width: max-content;
+  }
+  #telefone {
+    position: fixed;
+    top: 240px;
+    left: 480px;
+    height: max-content;
+    width: max-content;
+  }
+  #certidao {
+    position: fixed;
+    top: 257px;
+    left: 40px;
+    height: max-content;
+    width: max-content;
+  }
+  #comarca {
+    position: fixed;
+    top: 257px;
+    left: 165px;
+    height: max-content;
+    width: max-content;
+  }
+  #distrito {
+    position: fixed;
+    top: 257px;
+    left: 470px;
+    height: max-content;
+    width: max-content;
+  }
+  #livro {
+    position: fixed;
+    top: 274px;
+    left: 40px;
+  }
+  #folha {
+    position: fixed;
+    top: 274px;
+    left: 165px;
+  }
+  #termo {
+    position: fixed;
+    top: 274px;
+    left: 325px;
+  }
+  #data_certidao {
+    position: fixed;
+    top: 274px;
+    left: 472px;
+    z-index: 999;
+    width: max-content;
+    height: max-content;
+  }
+  #data_registro {
+    position: fixed;
+    z-index: 50;
+    top: 274px;
+    left: 630px;
+    height: max-content;
+    width: max-content;
+  }
+  #cutis {
+    position: fixed;
+    top: 296px;
+    left: 60px;
+    height: max-content;
+    width: max-content;
+  }
+  #altura {
+    position: fixed;
+    z-index: 50;
+    top: 296px;
+    left: 590px;
+    height: max-content;
+    width: max-content;
+  }
+  #cor_cabelo {
+    position: fixed;
+    top: 296px;
+    left: 310px;
+    z-index: 999;
+    height: max-content;
+    width: max-content;
+  }
+
+  #tipo_cabelo {
+  position: fixed;
+  top: 296px;
+  left: 400px;
+  z-index: 999;
+  height: max-content;
+  width: max-content;
+}
+
+#barba {
+  position: fixed;
+  top: 314px;
+  left: 60px;
+  z-index: 999;
+  height: max-content;
+  width: max-content;
+}
+
+#bigode {
+  position: fixed;
+  top: 314px;
+  left: 310px;
+  z-index: 999;
+  height: max-content;
+  width: max-content;
+}
+
+  #cor_olhos {
+  position: fixed;
+  z-index: 15;
+  top: 314px;
+  left: 590px;
+  height: max-content;
+  width: max-content;
+}
+
+#tipo_olhos {
+  position: fixed;
+  top: 314px;
+  left: 660px;
+  height: max-content;
+  z-index: 9999;
+  width: 100%;
+}
+
+#anomalias {
+  position: fixed;
+  top: 332px;
+  left: 80px;
+  height: max-content;
+  width: max-content;
+}
+
+#endereco {
+  position: fixed;
+  top: 352px;
+  left: 70px;
+  height: max-content;
+  width: 100%;
+}
+
+#numero {
+  position: fixed;
+  z-index: 50;
+  top: 352px;
+  left: 448px;
+  height: max-content;
+  width: max-content;
+}
+
+#complemento {
+  position: fixed;
+  top: 352px;
+  left: 532px;
+  height: max-content;
+  width: max-content;
+  white-space: nowrap;
+  overflow: hidden;
+ text-overflow: ellipsis;
+ z-index: 999999;
+}
+
+#bairro {
+  position: fixed;
+  top: 370px;
+  left: 70px;
+  height: max-content;
+  z-index: 99999;
+  width: max-content;
+}
+/* deixa comentado- alteramos de 388 para 378 */
+#observaçao {
+  position: fixed;
+  top: 382px;
+  left: 40px;
+  border: none;
+  height: max-content;
+  width: max-content;
+  white-space: nowrap;
+   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+#estadoDeNaturalide { 
+  position: fixed;
+  z-index: 50;
+  top: 370px;
+  left: 300px;
+  height: max-content;
+  width: max-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 99999;
+  
+}
+
+#cep {
+  position: fixed;
+  top: 370px;
+  left: 655px;
+  height: max-content;
+  width: max-content;
+}
+/* deixa comentado- alteramos de 405 para 415 */
+.dataid1 { 
+  position: fixed;
+  top: 425px;
+  left: 655px;
+  height: max-content;
+  width: max-content;
+}
+
+#usuario {
+  position: fixed;
+  top: 442px;
+  left: 655px;
+  height: max-content;
+  width: max-content;
+}
+
+#posto {
+  position: fixed;
+  top: 425px;
+  left: 657px;
+  height: max-content;
+  width: max-content; 
+}
+
+.quadrado1 {
+  border: none;
+  -webkit-border-radius: 0px;
+  -webkit-appearance: none !important;
+}
+
+#nrg {
+  display: block;
+  position: fixed;
+  top: 552px;
+  left: 65px;
+  z-index: 50;
+  height: max-content;
+  width: max-content;
+}
+
+#nomecompleto {
+  display: block;
+  position: fixed;
+
+  top: 573px;
+  left: 65px;
+  z-index: 50;
+  height: max-content;
+  width: max-content;
+}
+
+#posto2 {
+  display: block;
+  position: fixed;
+  top: 616px;
+  left: 90px;
+  z-index: 50;
+  height: max-content;
+  width: max-content;
+}
+
+#camera {
+  display: none;
+  position: fixed;
+  top: 478px;
+  left: 110px;
+  z-index: 80;
+}
+
+#tirarBotao {
+  display: none;
+}
+/* lembrar que o nome aqui é de estado que mora, tem que trocar no html e no banco*/
+#estadoDeNaturalidade { 
+  position: fixed;
+  top: 370px;
+  left: 400px;
+  height: max-content;
+  z-index: 99999;
+  width: max-content;
+}
+
+#DiaAtual { 
+  display: block;
+  position: fixed;
+  z-index: 50;
+  height: max-content;
+  width: max-content;
+  top: 405px;
+  left: 655px; 
+}
+
+#DiaAtual1 { 
+  display: block;
+  position: fixed;
+  top: 597px;
+  left: 90px;
+  z-index: 50;
+  height: max-content;
+  width: max-content;
+ 
+}
+
+
+#estadoDeNaturalidade{
+  position: fixed;
+  top: 370px;
+  left: 585px; 
+  height: max-content;
+  z-index: 99999;
+  width: max-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+
+/* lembrar que o nome aqui é de cidade que mora, tem que trocar no html e no banco*/
+#cidadeNaturalidade {
+  position: fixed;
+  top: 370px;
+  left: 330px; 
+  height: max-content;
+  z-index: 99999;
+  width: max-content;
+}
+
+
+
+
+}
