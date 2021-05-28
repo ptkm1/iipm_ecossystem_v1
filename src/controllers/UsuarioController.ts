@@ -67,7 +67,8 @@ class UsuarioController {
       email,
       senha: bcrypt.hashSync(senha, 8),
       posto,
-      imagem: image.filename }
+      imagem: image && image.filename 
+    }
 
       try {
 
@@ -79,7 +80,9 @@ class UsuarioController {
         .status(200)
           .send({ mensagem: "Usuário criado com sucesso" })
 
-      } catch {
+      } catch (error) {
+
+        console.log(error)
 
       return res
         .status(404)

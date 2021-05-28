@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <label for="nome">nome</label>
+    <input type="text" name="nome" id="nome">
+    <label for="email">email</label>
+    <input type="email" name="email" id="email">
+    <label for="senha">senha</label>
+    <input type="password" name="senha" id="senha">
+    <label for="posto">posto</label>
+    <input type="text" name="posto" id="posto">
+    <a href="#" onclick="enviar()">Criar</a>
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    
+    async function enviar(e) {
+      // e.preventDefault()
+
+      const nome = document.getElementById("nome")
+      const email = document.getElementById("email")
+      const senha = document.getElementById("senha")
+      const posto = document.getElementById("posto")
+
+      const {data} = await axios.post('http://localhost:3333/usuarios/criar',{
+        nome,
+        email,
+        senha,
+        posto
+      })
+      console.log(data)
+    }
+
+  </script>
+</body>
+</html>
