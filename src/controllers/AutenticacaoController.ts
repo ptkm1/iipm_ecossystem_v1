@@ -16,7 +16,7 @@ class AutenticacaoController {
 				nome: Usuario.nome,
 				email: Usuario.email,
 				posto: Usuario.posto,
-				imagem: `http://192.168.0.100:3333/uploads/${Usuario.imagem}`
+				imagem: `https://i1.wp.com/terracoeconomico.com.br/wp-content/uploads/2019/01/default-user-image.png?ssl=1`
 			}
 
 			if (Usuario.length === 0) {
