@@ -63,6 +63,62 @@ class RegistroRGBD {
 
   }
 
+  async BuscarPorData( req: Request, res: Response ) {
+    const { dia } = req.body
+
+    console.log(dia)
+
+    try {
+      
+      const Registro =
+      await Conexao
+        .select('*')
+          .where('DataRegistro', dia)
+            .into('registrorgbd')
+
+    if(!Registro) throw new Error()
+
+      return res
+        .status(200)
+          .send(Registro)
+
+    } catch (error) {
+      console.log(error)
+      return res
+        .status(401)
+          .send({ mensagem: "Registro não encontrado" })
+    }
+  }
+
+  async CancelarFicha( req: Request, res: Response ) {
+    const {id, Status} = req.body
+
+    try {
+      
+      const Registro =
+      await Conexao
+        .table('registrorgbd')
+          .where('id', id)
+            .update({Status})
+      
+
+      if(!Registro) throw new Error()
+
+      
+
+      return res
+        .status(200)
+          .send({ mensagem: "Ficha Cancelada com sucesso!" })
+      
+    } catch (error) {
+      console.log(error)
+      return res
+        .status(401)
+          .send({ mensagem: "Não foi possivel atualizar a ficha para Cancelado" })
+    }
+
+  }
+
 
   async buscarPorID( req: Request, res: Response ) {
     const { id } = req.params
@@ -90,6 +146,31 @@ class RegistroRGBD {
 
 
   }
+
+  async DeletarFicha( req: Request, res: Response ) {
+    const { id } = req.params
+
+    try {
+
+      const Response =
+      await Conexao
+        .table('registrorgbd')
+          .where('id', id)
+            .delete()
+
+      if(!Response) throw new Error()
+
+      return res
+        .status(200)
+          .send({ mensagem: "Ficha deletada com sucesso" })
+
+    } catch {
+      return res
+        .status(401)
+          .send({ mensagem: "Registro não encontrado" })
+    }
+  }
+
 
   async EditarPorID( req: Request, res: Response ) {
 
@@ -127,6 +208,25 @@ class RegistroRGBD {
       .status(200)
         .send(data)
 
+  }
+
+  async FecharDia ( req: Request, res: Response ) {
+    const data = req.body
+
+    try {
+      await Conexao
+        .insert(data)
+          .into('controleDiarioSeap')
+
+      return res
+        .status(200)
+          .send({ mensagem: "Registrado com sucesso!" })
+
+    } catch (error) {
+      return res
+        .status(401)
+          .send({ mensagem: "Houve algum erro!", error })
+    }
   }
 
 

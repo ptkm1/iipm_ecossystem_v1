@@ -12,12 +12,7 @@ import RegistroRGBD from './controllers/RegistroRGBD'
 import UsuarioController from './controllers/UsuarioController'
 const rotas = Router()
 
-
-
-
-
 const upload = multer( MulterConfig )
-
 
 /* [ROTAS DE CIDADÃO] */
 rotas.get('/cidadao', CidadaoController.Index)
@@ -55,6 +50,11 @@ rotas.get('/registro/:id', RegistroRGBD.buscarPorID)
 rotas.post('/registro1via', RegistroRGBD.EditarPorID)
 rotas.get('/estados', RegistroRGBD.BuscarEstados)
 
+rotas.post('/fechardia', RegistroRGBD.FecharDia)
+
+rotas.post('/verificacaodiaria', RegistroRGBD.BuscarPorData)
+rotas.patch('/verificacaodiaria', RegistroRGBD.CancelarFicha)
+rotas.delete('/verificacaodiaria/:id', RegistroRGBD.DeletarFicha)
 
 
 //  Rota teste de Redução de tamanho de foto, *funcionando*
