@@ -8,6 +8,7 @@ import AutenticacaoController from './controllers/AutenticacaoController'
 import CidadaoController from './controllers/CidadaoController'
 import DocumentoController from './controllers/DocumentoController'
 import RegistroRGBD from './controllers/RegistroRGBD'
+import RelatorioController from './controllers/RelatorioController'
 // [Controllers]
 import UsuarioController from './controllers/UsuarioController'
 const rotas = Router()
@@ -55,6 +56,12 @@ rotas.post('/fechardia', RegistroRGBD.FecharDia)
 rotas.post('/verificacaodiaria', RegistroRGBD.BuscarPorData)
 rotas.patch('/verificacaodiaria', RegistroRGBD.CancelarFicha)
 rotas.delete('/verificacaodiaria/:id', RegistroRGBD.DeletarFicha)
+// Relatorios SEAP
+rotas.get('/fichasgerais', RelatorioController.Geral)
+rotas.get('/primeiravia', RelatorioController.PrimeiraVia)
+rotas.get('/fichascanceladas', RelatorioController.Cancelados)
+rotas.get('/demaisvias', RelatorioController.DemaisVias)
+
 
 
 //  Rota teste de Redução de tamanho de foto, *funcionando*
