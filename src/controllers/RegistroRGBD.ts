@@ -73,7 +73,7 @@ class RegistroRGBD {
       const Registro =
       await Conexao
         .select('*')
-          .where('DataRegistro', dia)
+          .where('DataDeCriacao', dia)
             .into('registrorgbd')
 
     if(!Registro) throw new Error()
