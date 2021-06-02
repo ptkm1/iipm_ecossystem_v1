@@ -17,7 +17,7 @@ class RegistroRGBD {
   }
 
   async ProcurarPorNome( req: Request, res: Response ) {
-    const { nome, mae } = req.body
+    const { nome, mae, Posto } = req.body
 
     try {
       const data =
@@ -25,6 +25,7 @@ class RegistroRGBD {
         .select('*')
           .where('NomeCompleto', nome)
             .orWhere('NomeMae', mae)
+            .andWhere('Posto', Posto)
               .into('registrorgbd')
 
               if(data.length === 0) throw new Error()
@@ -64,9 +65,7 @@ class RegistroRGBD {
   }
 
   async BuscarPorData( req: Request, res: Response ) {
-    const { dia } = req.body
-
-    console.log(dia)
+    const { dia, Posto } = req.body
 
     try {
       
@@ -74,7 +73,8 @@ class RegistroRGBD {
       await Conexao
         .select('*')
           .where('DataDeCriacao', dia)
-            .into('registrorgbd')
+            .andWhere('Posto', Posto)
+              .into('registrorgbd')
 
     if(!Registro) throw new Error()
 
