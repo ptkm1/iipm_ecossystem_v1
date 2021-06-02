@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { Conexao } from '../configs/ConexaoDB'
+import { Conexao } from '../../configs/ConexaoDB'
 
 class RelatorioController {
   async Geral(req: Request, res: Response) {
@@ -28,10 +28,9 @@ class RelatorioController {
 
   async DemaisVias(req: Request, res: Response) {
     try {
-      const Registro = await Conexao
-        .table('registrorgbd')  
-        .where('Posto', req.body.Posto)
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao')
+      const Registro = await Conexao.select('*')
+        .whereNot('Via', '1º VIA')
+        .into('registrorgbd')
 
       if (!Registro) throw new Error()
 
@@ -42,13 +41,10 @@ class RelatorioController {
   }
 
   async Cancelados(req: Request, res: Response) {
-    // knex('users').whereBetween('votes', [1, 100])
     try {
       const Response = await Conexao.table('registrorgbd')
         .where('Status', 'cancelado')
-        .andWhere('Posto', req.body.Posto)
-        .andWhereBetween('DataDeCriacao', [req.body.DataDeCriacaoInicial,req.body.DataDeCriacaoFinal])
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao')
+        .select('*')
 
       if (!Response) throw new Error()
 

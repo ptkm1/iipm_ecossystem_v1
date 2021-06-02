@@ -59,8 +59,8 @@ rotas.delete('/verificacaodiaria/:id', RegistroRGBD.DeletarFicha)
 // Relatorios SEAP
 rotas.get('/fichasgerais', RelatorioController.Geral)
 rotas.get('/primeiravia', RelatorioController.PrimeiraVia)
-rotas.get('/fichascanceladas', RelatorioController.Cancelados)
-rotas.get('/demaisvias', RelatorioController.DemaisVias)
+rotas.post('/fichascanceladas', RelatorioController.Cancelados)
+rotas.post('/demaisvias', RelatorioController.DemaisVias)
 
 
 
