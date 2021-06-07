@@ -31,7 +31,7 @@ class RelatorioController {
       const Registro = await Conexao
         .table('registrorgbd')  
         .where('Posto', req.body.Posto)
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao')
+        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao', 'NomeCompleto')
 
       if (!Registro) throw new Error()
 
@@ -42,13 +42,13 @@ class RelatorioController {
   }
 
   async Cancelados(req: Request, res: Response) {
-    // knex('users').whereBetween('votes', [1, 100])
+
     try {
       const Response = await Conexao.table('registrorgbd')
         .where('Status', 'cancelado')
         .andWhere('Posto', req.body.Posto)
         .andWhereBetween('DataDeCriacao', [req.body.DataDeCriacaoInicial,req.body.DataDeCriacaoFinal])
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao')
+        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao', 'NomeCompleto')
 
       if (!Response) throw new Error()
 
