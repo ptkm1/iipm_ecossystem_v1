@@ -4,6 +4,7 @@ import multer from 'multer'
 import path from 'path'
 import sharp from 'sharp'
 import MulterConfig from './configs/MulterConfig'
+import AdminController from './controllers/AdminController'
 import AutenticacaoController from './controllers/AutenticacaoController'
 import CidadaoController from './controllers/CidadaoController'
 import DocumentoController from './controllers/DocumentoController'
@@ -41,6 +42,12 @@ rotas.delete('/usuarios/:barcode', UsuarioController.DeletarUsuario)
 rotas.put('/usuarios/:barcode', upload.single('image'), UsuarioController.AtualizarUsuario)
 
 rotas.post('/autenticar', AutenticacaoController.AutenticarUsuario)
+
+/* [ROTAS DE ADMINISTRADOR] */
+
+rotas.post('/admin', AdminController.Create)
+rotas.get('/admin', AdminController.Create)
+rotas.post('/admin/autenticar', AutenticacaoController.AutenticarAdmin)
 
 /* [ROTAS DO SEAP] */
 

@@ -166,20 +166,6 @@ class UsuarioController {
 
   }
 
-  // async Mail( req: Request, res: Response ) {
-
-  //   // Serviço para envio de e-mail fake (apenas para estudo de interfaces e classes)
-
-  //   const emailService = new EmailService()
-
-  //   emailService.sendMail({
-  //     para: { nome: "Diego", email: "diego@gmail.com" },
-  //     mensagem: { subject: "Bem-vindo ao sistema", body: "seja bem-vindo" },
-  //   })
-
-  //   return res.send("Sucesso")
-  // }
-
 }
 
 export default new UsuarioController()
