@@ -31,7 +31,7 @@ class RelatorioController {
       const Registro = await Conexao
         .table('registrorgbd')  
         .where('Posto', req.body.Posto)
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao', 'NomeCompleto', 'Usuario')
+        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario')
 
       if (!Registro) throw new Error()
 
@@ -48,7 +48,7 @@ class RelatorioController {
         .where('Status', 'cancelado')
         .andWhere('Posto', req.body.Posto)
         .andWhereBetween('DataDeCriacao', [req.body.DataDeCriacaoInicial,req.body.DataDeCriacaoFinal])
-        .select('NumeroDaFicha','Via','DataNasc','NRG','Result','Observaçao', 'NomeCompleto', 'Usuario')
+        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario')
 
       if (!Response) throw new Error()
 
