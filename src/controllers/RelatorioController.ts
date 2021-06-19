@@ -28,10 +28,11 @@ class RelatorioController {
 
   async DemaisVias(req: Request, res: Response) {
     try {
-      const Registro = await Conexao
+      const Registro: any = await Conexao
         .table('registrorgbd')  
         .where('Posto', req.body.Posto)
-        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario')
+        .andWhereBetween('DataDeCriacao', [req.body.DataDeCriacaoInicial,req.body.DataDeCriacaoFinal])
+        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario','Posto')
 
       if (!Registro) throw new Error()
 
@@ -44,11 +45,11 @@ class RelatorioController {
   async Cancelados(req: Request, res: Response) {
 
     try {
-      const Response = await Conexao.table('registrorgbd')
+      let Response: any = await Conexao.table('registrorgbd')
         .where('Status', 'cancelado')
         .andWhere('Posto', req.body.Posto)
         .andWhereBetween('DataDeCriacao', [req.body.DataDeCriacaoInicial,req.body.DataDeCriacaoFinal])
-        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario')
+        .select('NumeroDaFicha','NomeCompleto','Via','DataNasc','NRG','Result', 'Usuario', 'Posto')
 
       if (!Response) throw new Error()
 
