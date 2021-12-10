@@ -202,7 +202,21 @@ class RegistroRGBD {
     const data =
       await Conexao
         .select()
-          .into('estado')
+          .into('estados')
+
+    return res
+      .status(200)
+        .send(data)
+
+  }
+
+  async BuscarCidadePorCod( req: Request, res: Response ) {
+
+    const data =
+      await Conexao
+        .select()
+          .into('cidades')
+            .where('estados_cod_estados', req.params.codigo)
 
     return res
       .status(200)

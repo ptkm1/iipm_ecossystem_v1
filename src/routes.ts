@@ -57,6 +57,7 @@ rotas.post('/registrorgbd', RegistroRGBD.Registrar)
 rotas.get('/registro/:id', RegistroRGBD.buscarPorID)
 rotas.post('/registro1via', RegistroRGBD.EditarPorID)
 rotas.get('/estados', RegistroRGBD.BuscarEstados)
+rotas.get('/cidades/:codigo', RegistroRGBD.BuscarCidadePorCod)
 
 rotas.post('/fechardia', RegistroRGBD.FecharDia)
 
@@ -91,7 +92,7 @@ rotas.post('/create', upload.single('thumb'), async (req: Request, res: Response
 
   })
 
-  sharp(req.file.path)
+  sharp(req.file?.path)
     .resize(1000)
     .toFile(path.join(__dirname, 'uploads', nome , barcode + '.jpeg' ))
 
